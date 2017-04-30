@@ -34,3 +34,20 @@ from performance_schema.events_statements_summary_by_digest order by sum_timer_w
 ## 4. Identifying Resource Bottlenecks by Wait Events
 ### 2 What is Wait Event?
 When MySQL Engine has to wait for any resource or operation to execute the next task, it is called as a Wait Event.
+
+
+### 4 Setting up Events
+Instruments (collects raw data based on event)
+- idle
+- memory
+- stage
+- statement
+- transaction
+- wait
+
+Consumers(destination of the data collected)
+- Current
+- History
+- History Long
+- Summary
+- Summary Digests
