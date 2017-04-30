@@ -20,4 +20,13 @@ change context
 ```
 use performance_schema;
 select * from user_variable_by_thread;
+select * from setup_timers;
+```
+find query with high execution time
+```
+select digest_text as query, count_star as exec_count, sec_to_time(sum_timer_wait/1000000000000) as exec_time_total,
+sec_to_time(max_timer_wait/1000000000000) as exec_time_max, (avg_timer_wait/1000000000) as exec_time_avg_ms,
+sum_rows_sent as rows_sent,
+sum_rows_examined as rows_scanned
+from performance_schema.events_statements_summary_by_digest order by sum_timer_wait desc;
 ```
