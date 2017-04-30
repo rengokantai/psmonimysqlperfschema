@@ -51,3 +51,40 @@ Consumers(destination of the data collected)
 - History Long
 - Summary
 - Summary Digests
+
+### 5 Demo: Setting up Events
+```
+select * from performance_schema.setup_instruments;
+```
+
+```
+select * from performance_schema.setup_consumers;
+```
+
+#### 01:02
+```
+select * from performance_schema.setup_instruments where name like 'statement/%';
+```
+```
+update performance_schema.setup_instruments set enabled='yes', timed='yes' where name like 'statement/%';
+```
+
+### 7 Demo: Steps to Diagnose Problems
+```
+select current_user(), connection_id();
+show full_processlist;
+```
+
+```
+select thread_id,process_id from performance_schema.threads where process_id = connection_id();
+```
+
+#### 03:16
+```
+select * from performance_schema.events_waits_current;
+```
+
+#### 06:54
+```
+select event_name，（timer_end-timer_start)/1000000000 as 'duration(ms)', object_name, object_type,index_namemoperation from performane_schema.events_waits_current e inner join performance_schema.threads t on e.thread_id=t.thread_id where processlist_id=connection_id();
+```
