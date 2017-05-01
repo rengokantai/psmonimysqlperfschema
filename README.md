@@ -69,7 +69,7 @@ select * from performance_schema.setup_instruments where name like 'statement/%'
 update performance_schema.setup_instruments set enabled='yes', timed='yes' where name like 'statement/%';
 ```
 
-### 7 Demo: Steps to Diagnose Problems
+### 7 Demo: Steps to Diagnose Problems - Part 1
 ```
 select current_user(), connection_id();
 show full_processlist;
@@ -87,4 +87,8 @@ select * from performance_schema.events_waits_current;
 #### 06:54
 ```
 select event_name，（timer_end-timer_start)/1000000000 as 'duration(ms)', object_name, object_type,index_namemoperation from performane_schema.events_waits_current e inner join performance_schema.threads t on e.thread_id=t.thread_id where processlist_id=connection_id();
+```
+### 8 Demo: Steps to Diagnose Problems - Part 2
+```
+set global general_log = 'off';
 ```
